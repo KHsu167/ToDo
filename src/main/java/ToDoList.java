@@ -4,35 +4,39 @@ import java.util.List;
 
 public class ToDoList {
 
-    private String toDoListName;
+//  private String toDoListName;
     private Task task;
     private List<Task> tasksList = new ArrayList<>();
 
-    public String getToDoListName() {
-        return toDoListName;
+    public List<Task> getTasksList() {
+        return tasksList;
     }
 
-    public void setToDoListName(String name) {
-        this.toDoListName = name;
+    public Task createTask(String userResponse) {
+        if (userResponse != null) {
+            String[] taskProperties = userResponse.split(", ");
+            task.setTitle(taskProperties[0]);
+            task.setDescription(taskProperties[1]);
+            task.setDeadline(taskProperties[2]);
+        }
+        return null;
     }
 
-    public Task createTask(String name, String description, Date deadline) {
-        task.setName(name);
-        task.setDescription(description);
-        task.setDeadline(deadline);
-        return task;
+    public void removeTask(String name) {
+        for (int i = 0; i < tasksList.size(); i++) {
+            if (tasksList.get(i).getTitle() != null && tasksList.get(i).getTitle().contains(name)) {
+                tasksList.remove(tasksList.get(i));
+            }
+        }
     }
+
+//    public boolean updateTask(Task updatedTask) {
+//
+//    }
 
     public List<Task> assignToList(Task task) {
         tasksList.add(task);
         return tasksList;
     }
 
-    public void removeTask(String name) {
-        for (int i = 0; i < tasksList.size(); i++) {
-            if (tasksList.get(i).getName().equalsIgnoreCase(name)) {
-                tasksList.remove(i);
-            }
-        }
-    }
 }

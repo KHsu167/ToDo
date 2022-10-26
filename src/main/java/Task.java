@@ -2,12 +2,12 @@ import java.util.Date;
 
 public class Task {
 
-    private String name;
+    private String title;
     private String description;
-    private Date deadline;
+    private String deadline;
 
-    public Task(String name, String description, Date deadline) {
-        this.name = name;
+    public Task(String name, String description, String deadline) {
+        this.title = name;
         this.description = description;
         this.deadline = deadline;
     }
@@ -20,24 +20,24 @@ public class Task {
         this.description = description;
     }
 
-    public Date getDeadline() {
+    public String getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(String deadline) {
         this.deadline = deadline;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
     public String toString() {
-        return name + ": " + description + " Deadline: " + deadline;
+        return title + ": " + description + "  Deadline- " + deadline;
     }
 }
