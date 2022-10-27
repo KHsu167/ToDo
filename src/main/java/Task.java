@@ -5,6 +5,10 @@ public class Task {
     private String title;
     private String description;
     private String deadline;
+    //TODO private boolean isCompleted = false;
+
+    public Task(){
+    }
 
     public Task(String name, String description, String deadline) {
         this.title = name;

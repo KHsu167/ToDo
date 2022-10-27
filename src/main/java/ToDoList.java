@@ -1,11 +1,13 @@
+import exceptions.IllegalRemovalDetailsEnteredException;
+import exceptions.IllegalTaskDetailsEnteredException;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class ToDoList {
 
-//  private String toDoListName;
-    private Task task;
+    //  private String toDoListName;
     private List<Task> tasksList = new ArrayList<>();
 
     public List<Task> getTasksList() {
@@ -13,30 +15,32 @@ public class ToDoList {
     }
 
     public Task createTask(String userResponse) {
-        if (userResponse != null) {
-            String[] taskProperties = userResponse.split(", ");
-            task.setTitle(taskProperties[0]);
-            task.setDescription(taskProperties[1]);
-            task.setDeadline(taskProperties[2]);
+        Task task = new Task();
+        String[] taskProperties = userResponse.split(",");
+        if (taskProperties.length == 3) {
+            task.setTitle(taskProperties[0].trim());
+            task.setDescription(taskProperties[1].trim());
+            task.setDeadline(taskProperties[2].trim());
+            tasksList.add(task);
+        } else {
+            throw new IllegalTaskDetailsEnteredException();
         }
-        return null;
+        return task;
     }
 
+    //TODO fix removal logic
     public void removeTask(String name) {
         for (int i = 0; i < tasksList.size(); i++) {
-            if (tasksList.get(i).getTitle() != null && tasksList.get(i).getTitle().contains(name)) {
+            if (tasksList.get(i).getTitle() != null && tasksList.get(i).getTitle().equals(name)) {
                 tasksList.remove(tasksList.get(i));
             }
         }
+        throw new IllegalRemovalDetailsEnteredException();
     }
 
 //    public boolean updateTask(Task updatedTask) {
 //
 //    }
 
-    public List<Task> assignToList(Task task) {
-        tasksList.add(task);
-        return tasksList;
-    }
 
 }

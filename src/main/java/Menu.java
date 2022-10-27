@@ -33,16 +33,20 @@ public class Menu {
     public String getStringResponseFromUserInput(String prompt) {
         String response = null;
         System.out.println(prompt);
-        if (scanner.nextLine() != null) {
+
+        while (response == null) {
             response = scanner.nextLine();
+            if (response == null) {
+                System.out.println("Invalid entry. Please try again");
+            }
         }
         return response;
     }
 
     public void viewTaskList(List<Task> tasksList) {
         System.out.println();
-        for (Task task : tasksList) {
-            System.out.println(task);
+        for (int i = 0; i < tasksList.size(); i++) {
+            System.out.println("(" + (i + 1) + ") " + tasksList.get(i));
         }
     }
 }

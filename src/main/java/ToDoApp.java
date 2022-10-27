@@ -1,3 +1,6 @@
+import exceptions.IllegalRemovalDetailsEnteredException;
+import exceptions.IllegalTaskDetailsEnteredException;
+
 public class ToDoApp {
 
     private Menu menu;
@@ -19,11 +22,9 @@ public class ToDoApp {
             menu.printMainMenu();
             menuSelection = menu.promptForMenuSelection("Select an option: ");
             if (menuSelection == 1) {
-                //TODO prompt user to put in title, description, deadline and pass it to createTask
-                toDoList.assignToList(toDoList.createTask(menu.getStringResponseFromUserInput("Enter task details separated by comma: ")));
+                checkCreateTask();
             } else if (menuSelection == 2) {
-                //TODO prompt user to enter title of task to remove
-                toDoList.removeTask(menu.getStringResponseFromUserInput("Enter the title of the task you wish to remove: "));
+                checkRemoveTask();
             } else if (menuSelection == 4) {
                 menu.viewTaskList(toDoList.getTasksList());
             } else if (menuSelection == 0) {
@@ -33,4 +34,26 @@ public class ToDoApp {
             }
         }
     }
+
+    private void checkCreateTask() {
+        String taskDetailsEnteredByUser = menu.getStringResponseFromUserInput("Enter task details separated by comma: ");
+        try {
+            toDoList.createTask(taskDetailsEnteredByUser);
+            System.out.println("\nSuccessfully created!");
+        } catch (IllegalTaskDetailsEnteredException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void checkRemoveTask() {
+        String titleNameEnteredByUser = menu.getStringResponseFromUserInput("Enter the title of the task you wish to remove: ");
+        try {
+            toDoList.removeTask(titleNameEnteredByUser);
+            System.out.println("\nSuccessfully removed!");
+        } catch (IllegalRemovalDetailsEnteredException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
+
+
