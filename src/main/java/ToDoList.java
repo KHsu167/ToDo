@@ -28,14 +28,18 @@ public class ToDoList {
         return task;
     }
 
-    //TODO fix removal logic
     public void removeTask(String name) {
+        boolean isItAValidName = false;
         for (int i = 0; i < tasksList.size(); i++) {
             if (tasksList.get(i).getTitle() != null && tasksList.get(i).getTitle().equals(name)) {
                 tasksList.remove(tasksList.get(i));
+                isItAValidName = true;
             }
         }
-        throw new IllegalRemovalDetailsEnteredException();
+        if (!isItAValidName) {
+            throw new IllegalRemovalDetailsEnteredException();
+        }
+
     }
 
 //    public boolean updateTask(Task updatedTask) {

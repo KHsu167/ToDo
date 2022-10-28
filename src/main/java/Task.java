@@ -5,7 +5,7 @@ public class Task {
     private String title;
     private String description;
     private String deadline;
-    //TODO private boolean isCompleted = false;
+    private boolean isCompleted = false;
 
     public Task(){
     }
@@ -40,8 +40,22 @@ public class Task {
         this.title = title;
     }
 
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
+    }
+
     @Override
     public String toString() {
-        return title + ": " + description + "  Deadline- " + deadline;
+        String taskStatus;
+        if (!isCompleted) {
+            taskStatus = "ongoing";
+        } else {
+            taskStatus = "completed";
+        }
+        return title + ": " + description + "  Deadline: " + deadline + " Status: " + taskStatus;
     }
 }

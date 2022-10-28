@@ -25,7 +25,7 @@ public class ToDoApp {
                 checkCreateTask();
             } else if (menuSelection == 2) {
                 checkRemoveTask();
-            } else if (menuSelection == 4) {
+            } else if (menuSelection == 5) {
                 menu.viewTaskList(toDoList.getTasksList());
             } else if (menuSelection == 0) {
                 continue;
