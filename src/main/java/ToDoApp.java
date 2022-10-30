@@ -37,6 +37,7 @@ public class ToDoApp {
 
     private void checkCreateTask() {
         String taskDetailsEnteredByUser = menu.getStringResponseFromUserInput("Enter task details separated by comma: ");
+
         try {
             toDoList.createTask(taskDetailsEnteredByUser);
             System.out.println("\nSuccessfully created!");

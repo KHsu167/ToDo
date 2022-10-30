@@ -22,25 +22,30 @@ public class ToDoList {
             task.setDescription(taskProperties[1].trim());
             task.setDeadline(taskProperties[2].trim());
             tasksList.add(task);
+
         } else {
             throw new IllegalTaskDetailsEnteredException();
         }
         return task;
     }
 
-    public void removeTask(String name) {
-        boolean isItAValidName = false;
-        for (int i = 0; i < tasksList.size(); i++) {
-            if (tasksList.get(i).getTitle() != null && tasksList.get(i).getTitle().equals(name)) {
-                tasksList.remove(tasksList.get(i));
-                isItAValidName = true;
-            }
-        }
-        if (!isItAValidName) {
-            throw new IllegalRemovalDetailsEnteredException();
-        }
-
+    //TODO fix removal logic
+    public void removeTask(Integer taskNum) {
+        if (taskNum <= 0 || )
     }
+
+//    boolean isItAValidName = false;
+//        for (int i = 0; i < tasksList.size(); i++) {
+//        if (tasksList.get(i).getTitle() != null && tasksList.get(i).getTitle().equals(name)) {
+//            tasksList.remove(tasksList.get(i));
+//            isItAValidName = true;
+//        }
+//    }
+//        if (!isItAValidName) {
+//        throw new IllegalRemovalDetailsEnteredException();
+//    }
+//
+//}
 
 //    public boolean updateTask(Task updatedTask) {
 //

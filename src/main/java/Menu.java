@@ -28,7 +28,6 @@ public class Menu {
     public void updateMenu2() {
         System.out.println();
         System.out.println("Enter...");
-        System.out.println("T to update title");
         System.out.println("D to update description");
         System.out.println("De to update deadline");
     }
@@ -59,6 +58,21 @@ public class Menu {
             response = scanner.nextLine();
             if (response == null) {
                 System.out.println("Invalid entry. Please try again");
+            }
+        }
+        return response;
+    }
+
+    public Integer getIntResponseFromUserInput(String prompt) {
+        Integer response = null;
+
+        while (response == null) {
+            System.out.println(prompt);
+            String responseAsString = scanner.nextLine();
+            try {
+                response = Integer.parseInt(responseAsString);
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a number");
             }
         }
         return response;
