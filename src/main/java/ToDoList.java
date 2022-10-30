@@ -1,8 +1,8 @@
-import exceptions.IllegalRemovalDetailsEnteredException;
+import exceptions.IllegalOptionException;
+import exceptions.TaskNumberOutOfRangeException;
 import exceptions.IllegalTaskDetailsEnteredException;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ToDoList {
@@ -17,10 +17,9 @@ public class ToDoList {
     public Task createTask(String userResponse) {
         Task task = new Task();
         String[] taskProperties = userResponse.split(",");
-        if (taskProperties.length == 3) {
-            task.setTitle(taskProperties[0].trim());
-            task.setDescription(taskProperties[1].trim());
-            task.setDeadline(taskProperties[2].trim());
+        if (taskProperties.length == 2) {
+            task.setDescription(taskProperties[0].trim());
+            task.setDeadline(taskProperties[1].trim());
             tasksList.add(task);
 
         } else {
@@ -31,25 +30,29 @@ public class ToDoList {
 
     //TODO fix removal logic
     public void removeTask(Integer taskNum) {
-        if (taskNum <= 0 || )
+        if (taskNum <= 0 || taskNum > tasksList.size()) {
+            throw new TaskNumberOutOfRangeException();
+        }
+        tasksList.remove(taskNum - 1);
     }
 
-//    boolean isItAValidName = false;
-//        for (int i = 0; i < tasksList.size(); i++) {
-//        if (tasksList.get(i).getTitle() != null && tasksList.get(i).getTitle().equals(name)) {
-//            tasksList.remove(tasksList.get(i));
-//            isItAValidName = true;
-//        }
-//    }
-//        if (!isItAValidName) {
-//        throw new IllegalRemovalDetailsEnteredException();
-//    }
-//
-//}
+    public Task getSelectedTask(Integer taskNum) {
+        if (taskNum <= 0 || taskNum > tasksList.size()) {
+            throw new TaskNumberOutOfRangeException();
+        }
+        return tasksList.get(taskNum - 1);
+    }
 
-//    public boolean updateTask(Task updatedTask) {
-//
-//    }
+    public void changeStatus(Task task) {
+        //TODO add some more logic in here in case task already set to completed
+        task.setCompleted(true);
+    }
 
-
+    public void updateTask(Task taskToUpdate, Integer optionToUpdate, String updateInfo) {
+        if (optionToUpdate == 1) {
+            taskToUpdate.setDescription(updateInfo);
+        } else if (optionToUpdate == 2) {
+            taskToUpdate.setDeadline(updateInfo);
+        } else throw new IllegalOptionException();
+    }
 }

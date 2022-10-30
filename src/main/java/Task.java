@@ -2,7 +2,6 @@ import java.util.Date;
 
 public class Task {
 
-    private String title;
     private String description;
     private String deadline;
     private boolean isCompleted = false;
@@ -10,8 +9,7 @@ public class Task {
     public Task(){
     }
 
-    public Task(String name, String description, String deadline) {
-        this.title = name;
+    public Task(String description, String deadline) {
         this.description = description;
         this.deadline = deadline;
     }
@@ -32,14 +30,6 @@ public class Task {
         this.deadline = deadline;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public boolean isCompleted() {
         return isCompleted;
     }
@@ -56,6 +46,6 @@ public class Task {
         } else {
             taskStatus = "completed";
         }
-        return title + ": " + description + "  Deadline: " + deadline + " Status: " + taskStatus;
+        return description + "  Deadline: " + deadline + " Status: " + taskStatus;
     }
 }

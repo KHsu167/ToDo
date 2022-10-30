@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Menu {
 
-    private Task task;
     private final Scanner scanner = new Scanner(System.in);
 
     public void printMainMenu() {
@@ -14,28 +13,22 @@ public class Menu {
         System.out.println("1: Create a task");
         System.out.println("2: Remove a task");
         System.out.println("3: Update a task");
-        System.out.println("4: Change status");
-        System.out.println("5: View task list");
+        System.out.println("4: View task list");
+        System.out.println("5: Change status to completed");
         System.out.println("0: Exit");
         System.out.println();
     }
 
-    public void updateMenu() {
-        System.out.println();
-        System.out.println("Which task would you like to update? (enter the number)");
-    }
+//    public void updateMenu() {
+//        System.out.println();
+//        System.out.println("Which task would you like to update? (enter the number)");
+//    }
 
     public void updateMenu2() {
         System.out.println();
         System.out.println("Enter...");
-        System.out.println("D to update description");
-        System.out.println("De to update deadline");
-    }
-
-    public void changeStatusMenu() {
-        System.out.println();
-        System.out.println();
-
+        System.out.println("1 to update description");
+        System.out.println("2 to update deadline");
     }
 
     public int promptForMenuSelection(String prompt) {
@@ -68,11 +61,25 @@ public class Menu {
 
         while (response == null) {
             System.out.println(prompt);
-            String responseAsString = scanner.nextLine();
+            String responseAsString = scanner.nextLine().trim();
             try {
                 response = Integer.parseInt(responseAsString);
             } catch (NumberFormatException e) {
-                System.out.println("Please enter a number");
+                System.out.println("\nPlease enter a number!");
+            }
+        }
+        return response;
+    }
+
+    public Integer getIntResponseWithNoPrompt() {
+        Integer response = null;
+
+        while (response == null) {
+            String responseAsString = scanner.nextLine().trim();
+            try {
+                response = Integer.parseInt(responseAsString);
+            } catch (NumberFormatException e) {
+                System.out.println("\nPlease enter a number!");
             }
         }
         return response;

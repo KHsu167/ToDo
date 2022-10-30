@@ -1,4 +1,5 @@
-import exceptions.IllegalRemovalDetailsEnteredException;
+import exceptions.IllegalOptionException;
+import exceptions.TaskNumberOutOfRangeException;
 import exceptions.IllegalTaskDetailsEnteredException;
 
 public class ToDoApp {
@@ -25,8 +26,12 @@ public class ToDoApp {
                 checkCreateTask();
             } else if (menuSelection == 2) {
                 checkRemoveTask();
-            } else if (menuSelection == 5) {
+            } else if (menuSelection == 3) {
+                checkUpdateTask();
+            } else if (menuSelection == 4) {
                 menu.viewTaskList(toDoList.getTasksList());
+            } else if (menuSelection == 5) {
+                checkTaskStatus();
             } else if (menuSelection == 0) {
                 continue;
             } else {
@@ -36,7 +41,7 @@ public class ToDoApp {
     }
 
     private void checkCreateTask() {
-        String taskDetailsEnteredByUser = menu.getStringResponseFromUserInput("Enter task details separated by comma: ");
+        String taskDetailsEnteredByUser = menu.getStringResponseFromUserInput("Enter description and deadline separated by comma: ");
 
         try {
             toDoList.createTask(taskDetailsEnteredByUser);
@@ -47,11 +52,47 @@ public class ToDoApp {
     }
 
     private void checkRemoveTask() {
-        String titleNameEnteredByUser = menu.getStringResponseFromUserInput("Enter the title of the task you wish to remove: ");
+        Integer titleNumEnteredByUser = menu.getIntResponseFromUserInput("Enter the task number you wish to remove: ");
+
         try {
-            toDoList.removeTask(titleNameEnteredByUser);
+            toDoList.removeTask(titleNumEnteredByUser);
             System.out.println("\nSuccessfully removed!");
-        } catch (IllegalRemovalDetailsEnteredException e) {
+        } catch (TaskNumberOutOfRangeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void checkUpdateTask() {
+        Integer titleNumEnteredByUser = menu.getIntResponseFromUserInput("Enter the task number you wish to update: ");
+        try {
+            Task taskToUpdate = toDoList.getSelectedTask(titleNumEnteredByUser);
+        } catch (TaskNumberOutOfRangeException e) {
+            System.out.println(e.getMessage());
+        }
+        while (true) {
+            menu.updateMenu2();
+            Integer optionSelected = menu.getIntResponseWithNoPrompt();
+            try {
+                //TODO fix logic to catch tasknumoutofrange exception
+                Task taskToUpdate = toDoList.getSelectedTask(titleNumEnteredByUser);
+                String updateInfo = menu.getStringResponseFromUserInput("Enter new info: ");
+                toDoList.updateTask(taskToUpdate, optionSelected, updateInfo);
+                System.out.println("\nSuccessfully updated!");
+                break;
+            } catch (IllegalOptionException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void checkTaskStatus() {
+        Integer titleNumEnteredByUser = menu.getIntResponseFromUserInput("Enter the task number you wish to change: ");
+
+        try {
+            Task taskToBeChanged = toDoList.getSelectedTask(titleNumEnteredByUser);
+            toDoList.changeStatus(taskToBeChanged);
+            System.out.println("\n(" + titleNumEnteredByUser + ") " + "completed!");
+        } catch (TaskNumberOutOfRangeException e) {
             System.out.println(e.getMessage());
         }
     }
