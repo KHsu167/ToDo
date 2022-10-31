@@ -70,7 +70,7 @@ public class ToDoApp {
 //                System.out.println(e.getMessage());
 //            }
 
-        menu.updateMenu2();
+        menu.updateMenu();
         while (true) {
             Integer optionSelected = menu.getIntResponseWithNoPrompt();
             try {

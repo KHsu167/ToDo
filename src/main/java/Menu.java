@@ -19,7 +19,7 @@ public class Menu {
         System.out.println();
     }
 
-    public void updateMenu2() {
+    public void updateMenu() {
         System.out.println();
         System.out.println("Enter...");
         System.out.println("1 to update description");
