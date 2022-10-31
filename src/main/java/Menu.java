@@ -19,11 +19,6 @@ public class Menu {
         System.out.println();
     }
 
-//    public void updateMenu() {
-//        System.out.println();
-//        System.out.println("Which task would you like to update? (enter the number)");
-//    }
-
     public void updateMenu2() {
         System.out.println();
         System.out.println("Enter...");
@@ -42,7 +37,6 @@ public class Menu {
         return menuSelection;
     }
 
-    //TODO MIGHT FIX IT
     public String getStringResponseFromUserInput(String prompt) {
         String response = null;
         System.out.println(prompt);

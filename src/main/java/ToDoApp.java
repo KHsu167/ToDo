@@ -64,13 +64,14 @@ public class ToDoApp {
 
     private void checkUpdateTask() {
         Integer titleNumEnteredByUser = menu.getIntResponseFromUserInput("Enter the task number you wish to update: ");
-        try {
-            Task taskToUpdate = toDoList.getSelectedTask(titleNumEnteredByUser);
-        } catch (TaskNumberOutOfRangeException e) {
-            System.out.println(e.getMessage());
-        }
+//            try {
+//                Task taskToUpdate = toDoList.getSelectedTask(titleNumEnteredByUser);
+//            } catch (TaskNumberOutOfRangeException e) {
+//                System.out.println(e.getMessage());
+//            }
+
+        menu.updateMenu2();
         while (true) {
-            menu.updateMenu2();
             Integer optionSelected = menu.getIntResponseWithNoPrompt();
             try {
                 //TODO fix logic to catch tasknumoutofrange exception
@@ -79,8 +80,9 @@ public class ToDoApp {
                 toDoList.updateTask(taskToUpdate, optionSelected, updateInfo);
                 System.out.println("\nSuccessfully updated!");
                 break;
-            } catch (IllegalOptionException e) {
+            } catch (TaskNumberOutOfRangeException | IllegalOptionException e) {
                 System.out.println(e.getMessage());
+                break;
             }
         }
     }
@@ -90,8 +92,8 @@ public class ToDoApp {
 
         try {
             Task taskToBeChanged = toDoList.getSelectedTask(titleNumEnteredByUser);
-            toDoList.changeStatus(taskToBeChanged);
-            System.out.println("\n(" + titleNumEnteredByUser + ") " + "completed!");
+            String message = toDoList.changeStatus(taskToBeChanged);
+            System.out.println("\n(" + titleNumEnteredByUser + ") " + message);
         } catch (TaskNumberOutOfRangeException e) {
             System.out.println(e.getMessage());
         }

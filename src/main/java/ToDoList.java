@@ -28,7 +28,6 @@ public class ToDoList {
         return task;
     }
 
-    //TODO fix removal logic
     public void removeTask(Integer taskNum) {
         if (taskNum <= 0 || taskNum > tasksList.size()) {
             throw new TaskNumberOutOfRangeException();
@@ -43,9 +42,15 @@ public class ToDoList {
         return tasksList.get(taskNum - 1);
     }
 
-    public void changeStatus(Task task) {
-        //TODO add some more logic in here in case task already set to completed
-        task.setCompleted(true);
+    public String changeStatus(Task task) {
+        String message;
+        if (task.isCompleted()) {
+            message = "already set to completed!";
+        } else {
+            task.setCompleted(true);
+            message = "completed!";
+        }
+        return message;
     }
 
     public void updateTask(Task taskToUpdate, Integer optionToUpdate, String updateInfo) {
